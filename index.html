@@ -63,7 +63,7 @@
 
         <section id="PCB">
             <img id="PCBImage" src="images/map/map.png" usemap="#PCB">
-            <map name="PCB">
+            <map id="imageMap" name="PCB">
                 <area id="frontendShape" shape="rect" coords="412,795,720,918" alt="frontend" href="#frontend">
                 <area id="graphicShape" shape="rect" coords="1562,55,1783,344" alt="graphicDesign" href="#graphicDesign">
                 <area id="pythonShape" shape="rect" coords="72,724,276,830" alt="python" href="#python">
@@ -77,9 +77,11 @@
 
         <section id="transitionFirst">
             <div id="ALU1">
-                <h1>
-                    Frontend
-                </h1>
+                <a>
+                    <h1>
+                        Frontend
+                    </h1>
+                </a>
             </div>
         </section>
 
@@ -91,46 +93,56 @@
         <section id="frontend">
             <div id="page">
                 <div id="frontendHeader">
-                    <div id="frontendHeaderTab">
+                    <div id="frontendHeaderTab" class="frontendTabs">
                         <img src="images/favicon.ico" width="32" height="32">
-                            <h2>
+                        <h2>
+                            <button id="frontendButton" class="frontendButtons" onclick="resetFrontendPriority()">
                                 Frontend
-                            </h2>
-                            <h4>
-                                X
-                            </h4>
+                            </button>
+                        </h2>
+                        <h4>
+                            X
+                        </h4>
                     </div>
-                    <div id="frontendHTMLTab">
+                    <div id="frontendHTMLTab" class="frontendTabs">
                         <img src="images/htmlIcon.png" width="32" height="32">
-                            <h2>
+                        <h2>
+                            <button id="HTMLButton" class="frontendButtons" onclick="makeHTMLPriority()">
                                 <abbr title="Hyper Text Markup Language">HTML</abbr>
-                            </h2>
-                            <h4>
-                                X
-                            </h4>
+                            </button>
+                        </h2>
+                        <h4>
+                            X
+                        </h4>
                     </div>
-                    <div id="frontendCSSTab">
+                    <div id="frontendCSSTab" class="frontendTabs">
                         <img src="images/css.png" width="32" height="32">
-                            <h2>
+                        <h2>
+                            <button id="CSSButton" class="frontendButtons" onclick="makeCSSPriority()">
                                 <abbr title="Cascading Style Sheet">CSS</abbr>
-                            </h2>
-                            <h4>
-                                X
-                            </h4>
+                            </button>
+                        </h2>
+                        <h4>
+                            X
+                        </h4>
                     </div>
-                    <div id="frontendJSTab">
+                    <div id="frontendJSTab" class="frontendTabs">
                         <img src="images/js.png" width="26" height="28">
-                            <h2>
-                                <abbr title="Javascript">JS</abbr>
-                            </h2>
-                            <h4>
-                                X
-                            </h4>
+                        <h2>
+                            <div>
+                                <button id="JSButton" class="frontendButtons" onclick="makeJSPriority()">
+                                    <abbr title="Javascript">JS</abbr>
+                                </button>
+                            </div>
+                        </h2>
+                        <h4>
+                            X
+                        </h4>
                     </div>
                 </div>
                 <div id="frontendURL">
                     <a href="https://github.com/">
-                        <h3>
+                        <h3 id="frontendURLText">
                             https://github.com/VlaKarlo
                         </h3>
                     </a>
@@ -212,6 +224,32 @@
                         <h3>
                             <abbr title="Javascript">script.js</abbr>
                         </h3>
+                        <p>
+                            <br>
+                            function resetFrontendPriority(){<br>
+                                &emsp;document.getElementById("HTML").style.display = "block";<br>
+                                &emsp;document.getElementById("CSS").style.display = "block";<br>
+                                &emsp;document.getElementById("JS").style.display = "block";<br>
+                            }<br>
+                            <br>
+                            function makeHTMLPriority(){<br>
+                                &emsp;document.getElementById("HTML").style.display = "block";<br>
+                                &emsp;document.getElementById("CSS").style.display = "none";<br>
+                                &emsp;document.getElementById("JS").style.display = "none";<br>
+                            }<br>
+                            <br>
+                            function makeCSSPriority(){<br>
+                                &emsp;document.getElementById("HTML").style.display = "none";<br>
+                                &emsp;document.getElementById("CSS").style.display = "block";<br>
+                                &emsp;document.getElementById("JS").style.display = "none";<br>
+                            }<br>
+                            <br>
+                            function makeJSPriority(){<br>
+                                &emsp;document.getElementById("HTML").style.display = "none";<br>
+                                &emsp;document.getElementById("CSS").style.display = "none";<br>
+                                &emsp;document.getElementById("JS").style.display = "block";<br>
+                            }<br>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -225,9 +263,11 @@
 
         <section id="transitionSecond">
             <div id="ALU2">
-                <h1>
-                    Graphic Design
-                </h1>
+                <a>
+                    <h1>
+                        Graphic Design
+                    </h1>
+                </a>
             </div>
         </section>
 
@@ -301,9 +341,11 @@
 
         <section id="transitionThird">
             <div id="ALU3">
-                <h1>
-                    Programming
-                </h1>
+                <a href="https://github.com/vlaKarlo/programming">
+                    <h1>
+                        Programming
+                    </h1>
+                </a>
             </div>
         </section>
 
@@ -314,135 +356,175 @@
         <section id="programming">
             <div id="programmingHeader">
                 <div id="languageSelector">
-                    <h2>
-                        <span>v</span> Languages
-                    </h2>
+                    <button id="languageButton" onclick="toggleLanguagesDisplay()">
+                        <h2 id="languageButtonText">
+                            <span>v</span> Languages
+                        </h2>
+                    </button>
                     <ul>
                         <li>
-                            <h3>
-                                <span>v</span> Python
-                            </h3>
+                            <button id="pythonButton" class="languageSelectorButtons" onclick="togglePythonProjectsDisplay()">
+                                <h3 id="python">
+                                    <span class="languageDropdownIndicator">v</span> Python
+                                </h3>
+                            </button>
                             <ul>
                                 <li>
-                                    Web Dev
+                                    <button class="projectSelectorButtons pythonProjects" onclick="showWebDevProject()">
+                                        Web Dev
+                                    </button>
                                 </li>
                                 <li>
-                                    Web Scraping
+                                    <button class="projectSelectorButtons pythonProjects">
+                                        Web Scraping
+                                    </button>
                                 </li>
                                 <li>
-                                    Apps
+                                    <button class="projectSelectorButtons pythonProjects">
+                                        Apps
+                                    </button>
                                 </li>
                                 <li>
-                                    Data Visualisation
+                                    <button class="projectSelectorButtons pythonProjects">
+                                        Data Visualisation
+                                    </button>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <h3>
-                                <span>v</span> Arduino
-                            </h3>
+                            <button id="arduinoButton" class="languageSelectorButtons" onclick="toggleArduinoProjectsDisplay()">
+                                <h3 id="arduino">
+                                    <span class="languageDropdownIndicator">v</span> Arduino
+                                </h3>
+                            </button>
                             <ul>
                                 <li>
-                                    ASV
+                                    <button class="projectSelectorButtons arduinoProjects" onclick="showASVProject()">
+                                        ASV
+                                    </button>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <h3>
-                                <span>></span> C
-                            </h3>
+                            <button id="CButton" class="languageSelectorButtons" onclick="toggleCProjectsDisplay()">
+                                <h3 id="C">
+                                    <span class="languageDropdownIndicator">></span> C
+                                </h3>
+                            </button>
+                            <ul>
+                                <li>
+                                    <button class="projectSelectorButtons CProjects">
+                                        ASV
+                                    </button>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <h3>
-                                <span>></span> C++
-                            </h3>
+                            <button id="C++Button" class="languageSelectorButtons" onclick="toggleCPlusPlusProjectsDisplay()">
+                                <h3 id="C++">
+                                    <span class="languageDropdownIndicator">></span> C++
+                                </h3>
+                            </button>
+                            <ul>
+                                <li>
+                                    <button class="projectSelectorButtons C++Projects">
+                                        ASV
+                                    </button>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <h3>
-                                <span>></span> C#
-                            </h3>
+                            <button id="C#Button" class="languageSelectorButtons" onclick="toggleCSharpProjectsDisplay()">
+                                <h3 id="C#">
+                                    <span class="languageDropdownIndicator">></span> C#
+                                </h3>
+                            </button>
+                            <ul>
+                                <li>
+                                    <button class="projectSelectorButtons C#Projects">
+                                        ASV
+                                    </button>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
             </div>
             <div id="languageBody">
                 <div id="languageDirectory">
-                    <a>
+                    <a id="languageDirectoryURL" href="https://github.com/vlaKarlo/programming">
                         https://github.com/vlaKarlo/programming
                     </a>
                 </div>
                 <div id="languageCode">
                     <p>
-                        #include <Keypad.h><br>
-                            <br>
-                            const byte ROWS = 4; //four rows<br>
-                            const byte COLS = 4; //four columns<br>
-                            //define the cymbols on the buttons of the keypads<br>
-                            char hexaKeys[ROWS][COLS] = {<br>
-                              {'1','2','3','A'},<br>
-                              {'4','5','6','B'},<br>
-                              {'7','8','9','C'},<br>
-                              {'*','0','#','D'}<br>
-                            };  <br>
-                            byte rowPins[ROWS] = {9, 8, 7, 6}; //connect to the row pinouts of the keypad<br>
-                            byte colPins[COLS] = {5, 4, 3, 2}; //connect to the column pinouts of the keypad<br>
-                            <br>
-                            //initialize an instance of class NewKeypad<br>
-                            Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); <br>
-                            <br>
-                            String pwd,realPwd="1234";<br>
-                            bool flag=1;<br>
-                            <br>
-                            void setup(){<br>
-                              Serial.begin(9600);<br>
-                              pinMode(11,OUTPUT);<br>
-                            }<br>
-                            <br>
-                            void checkPwd(){<br>
-                              for(int i=0;i<5;i++){<br>
-                                if(pwd[i]!=realPwd[i])<br>
-                                  flag=0;<br>
-                              }<br>
-                            }<br>
-                            <br>
-                            void loop(){<br>
-                              char c = customKeypad.getKey();<br>
-                              if (c){<br>
-                                Serial.println(c);<br>
-                                if(c=='#'){<br>
-                                  checkPwd();<br>
-                                  if(flag){<br>
-                                    tone(11,30);<br>
-                                    delay(200);<br>
-                                    noTone(11);<br>
-                                    tone(11,32);<br>
-                                    delay(200);<br>
-                                    noTone(11);<br>
-                                    tone(11,34);<br>
-                                    delay(200);<br>
-                                    noTone(11);<br>
-                                    tone(11,36);<br>
-                                    delay(200);<br>
-                                    noTone(11);<br>
-                                    <br>
-                                  }<br>
-                                  else{<br>
-                                    tone(11,0);<br>
-                                    delay(500);<br>
-                                    noTone(11);<br>
-                                  }<br>
-                                  <br>
-                                  pwd="";<br>
-                                  flag=1;<br>
-                                }<br>
-                                else{<br>
-                                  pwd+=c;<br>
-                                  Serial.println(pwd);<br>
-                                }<br>
-                              }<br>
-                              if(customKeypad.getState()==HOLD)<br>
-                                pwd="";<br>
-                            }<br>
+                        #include &#60;Keypad.h&#62;<br>
+                        <br>
+                        const byte ROWS = 4; <br>
+                        const byte COLS = 4; <br>
+                        <br>
+                        char hexaKeys[ROWS][COLS] = {<br>
+                        &emsp;{'1','2','3','A'},<br>
+                        &emsp;{'4','5','6','B'},<br>
+                        &emsp;{'7','8','9','C'},<br>
+                        &emsp;{'*','0','#','D'}<br>
+                        };  <br>
+                        byte rowPins[ROWS] = {9, 8, 7, 6}; <br>
+                        byte colPins[COLS] = {5, 4, 3, 2}; <br>
+                        <br>
+                        Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); <br>
+                        <br>
+                        String pwd,realPwd="1234";<br>
+                        bool flag=1;<br>
+                        <br>
+                        void setup(){<br>
+                        &emsp;Serial.begin(9600);<br>
+                        &emsp;pinMode(11,OUTPUT);<br>
+                        }<br>
+                        <br>
+                        void checkPwd(){<br>
+                        &emsp;for(int i=0;i&#60;5;i++){<br>
+                        &emsp;if(pwd[i]!=realPwd[i])<br>
+                        &emsp;&emsp;flag=0;<br>
+                        &emsp;}<br>
+                        }<br>
+                        <br>
+                        void loop(){<br>
+                        &emsp;char c = customKeypad.getKey();<br>
+                        &emsp;if (c){<br>
+                        &emsp;&emsp;Serial.println(c);<br>
+                        &emsp;&emsp;if(c=='#'){<br>
+                        &emsp;&emsp;&emsp;checkPwd();<br>
+                        &emsp;&emsp;&emsp;if(flag){<br>
+                        &emsp;&emsp;&emsp;&emsp;tone(11,30);<br>
+                        &emsp;&emsp;&emsp;&emsp;delay(200);<br>
+                        &emsp;&emsp;&emsp;&emsp;noTone(11);<br>
+                        &emsp;&emsp;&emsp;&emsp;tone(11,32);<br>
+                        &emsp;&emsp;&emsp;&emsp;delay(200);<br>
+                        &emsp;&emsp;&emsp;&emsp;noTone(11);<br>
+                        &emsp;&emsp;&emsp;&emsp;tone(11,34);<br>
+                        &emsp;&emsp;&emsp;&emsp;delay(200);<br>
+                        &emsp;&emsp;&emsp;&emsp;noTone(11);<br>
+                        &emsp;&emsp;&emsp;&emsp;tone(11,36);<br>
+                        &emsp;&emsp;&emsp;&emsp;delay(200);<br>
+                        &emsp;&emsp;&emsp;&emsp;noTone(11);<br>
+                        &emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;&emsp;else{<br>
+                        &emsp;&emsp;&emsp;&emsp;tone(11,0);<br>
+                        &emsp;&emsp;&emsp;&emsp;delay(500);<br>
+                        &emsp;&emsp;&emsp;&emsp;noTone(11);<br>
+                        &emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;pwd="";<br>
+                        &emsp;&emsp;flag=1;<br>
+                        &emsp;&emsp;}<br>
+                        &emsp;&emsp;else{<br>
+                        &emsp;&emsp;&emsp;pwd+=c;<br>
+                        &emsp;&emsp;&emsp;Serial.println(pwd);<br>
+                        &emsp;&emsp;}<br>
+                        &emsp;}<br>
+                        &emsp;if(customKeypad.getState()==HOLD)<br>
+                        &emsp;&emsp;pwd="";<br>
+                        }<br>
                     </p>
                 </div>
             </div>
@@ -459,9 +541,11 @@
                 </div>  
                 <div id="transitionFourth">
                     <div id="ALU4">
-                        <h1>
-                            Soft skills
-                        </h1>
+                        <a href="https://github">
+                            <h1>
+                                Soft skills
+                            </h1>
+                        </a>
                     </div>
                 </div>
                 <div id="connectionFifth">
@@ -490,7 +574,7 @@
 
     <footer>
         <section id="contact">
-            <form>
+            <form class="gform" action="https://script.google.com/macros/s/AKfycbyG53E2OWW0ZEUgWHLUbitwT2pZkAynUANHhYr8Tu3QBblXNPuBOdPqyEIyFxb9xbE/exec" method="post" data-email="karlo.vlasic1337@gmail.com">
                 <label>E-mail</label><br>
                 <div>
                     <input type="email" id="email" name="email" required ><br>
