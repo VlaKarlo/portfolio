@@ -12,6 +12,7 @@
 body{
     background-color: #58416d;
     margin: 0;
+    padding-top: 10px;
     padding-bottom: 10px;
     color: white;
 }
@@ -20,12 +21,16 @@ nav{
     text-align: center;
     display: none;
     padding: 10px;
-    justify-content: center;
+    background-color: #2c2e2c;
+    margin: 10px;
+    border-radius: 20px;
 }
 
 nav ul{
     display: flex;
     list-style-type: none;
+    background-color: #1e1f1d;
+    border-radius: 10px;
 }
 
 nav ul li{
@@ -36,6 +41,10 @@ nav ul li{
 nav ul a{
     color: white;
     text-decoration: none;
+}
+
+nav ul li a:hover{
+    color: #58416d;
 }
 
 abbr{
@@ -711,8 +720,8 @@ input:hover{
     #profilePicture{
         margin:auto;
         display: block;
-        width: 590px;
-        height: 400px;
+        width: 95%;
+        height: 95%;
     }
 
     #PCBImage{
@@ -720,7 +729,7 @@ input:hover{
     }
 
     #ALU1{
-        width: 530px;
+        width: 85%;
     }
 
     #frontendHeaderTab h4{
@@ -767,12 +776,12 @@ input:hover{
     #profilePicture{
         margin:auto;
         display: block;
-        width: 300px;
-        height: 200px;
+        width: 95%;
+        height: 95%;
     }
 
     #ALU1{
-        width: 240px;
+        width: 75%;
     }
 
 
@@ -845,6 +854,10 @@ input:hover{
         margin-right: 10px;
     }
     
+    #ALU3{
+        width: 75%;
+    }
+
     #programming{
         display: flex;
         flex-direction: column;
