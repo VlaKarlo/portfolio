@@ -58,6 +58,15 @@ window.onload = function(){
 
 };
 
+window.onscroll = function(){
+    var button = document.getElementById("returnButtonLink");
+    if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+        button.style.display = "block";
+      } else {
+        button.style.display = "none";
+      }
+};
+
 function resetFrontendPriority(){
     document.getElementById("frontendHeaderTab").style.backgroundColor = "#58416d";
     document.getElementById("frontendButton").style.backgroundColor = "#58416d";

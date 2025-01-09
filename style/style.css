@@ -251,7 +251,7 @@ abbr{
     background-color: #2c2e2c;
     margin: 10px;
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 100px 100px 0px 0px;
     text-align: center;
     font-size: x-large;
 }
@@ -266,12 +266,16 @@ abbr{
     cursor: pointer;
 }
 
-#graphicDesign{
+#bigViewDesign{
     margin-left: 40px;
     display: grid;
     gap: 10px;
     grid-template-areas: 
     'leftLine line1 topics line2 image1 image1 image1 image1 image1 image1 image1 image1 line3 image2 image2 image2 image2 image2 image2 image2 image2  '
+}
+
+#smallViewDesign{
+    display: none;
 }
 
 #connection3LineLeft{
@@ -291,16 +295,7 @@ abbr{
     margin: auto;
 }
 
-#graphicDesign h4{
-    display: inline;
-    background-color: #2c2e2c;
-    border-radius: 0 50px 50px 0;
-    padding: 20px;
-    margin: auto;
-    font-size: x-large;
-}
-
-#connectionTopicLines{
+.connectionTopicLines{
     grid-area: line1;
     display: flex;
     flex-direction: column;
@@ -313,20 +308,71 @@ abbr{
     border-radius: 3px;
 }
 
-#topics{
+.topic{
     grid-area: topics;
     display: flex;
     flex-direction: column;
 }
 
-#topicImageLeftLines{
+.topic a{
+    display: inline;
+    background-color: #2c2e2c;
+    border-radius: 0 50px 50px 0;
+    padding: 20px;
+    margin: auto;
+    font-size: x-large;
+    text-decoration: none;
+    color: white;
+}
+
+.topic a:hover{
+    color: #58416d;
+}
+
+.topicImageLeftLines{
     grid-area: line2;
     display: flex;
     flex-direction: column;
 }
 
-#ImageLeftImageRightLines{
+.topicImagesLeft{
+    grid-area: image1;
+    display: flex;
+    flex-direction: column;
+}
+
+.outterTopicImageBorder{
+    text-align: center;
+    background-color: #2c2e2c;
+    width: 96%;
+    height: 96%;
+    margin: 10px;
+    border-radius: 5%;
+}
+
+.innerTopicImageBorder{
+    text-align: center;
+    background-color: #1e1f1d;
+    width: 96%;
+    height: 96%;
+    margin: 10px auto;
+    border-radius: 5%;
+}
+
+.topicImages{
+    max-height: 400px;
+    max-width: 400px;
+    margin: 10px auto 0 auto;
+}
+
+.ImageLeftImageRightLines{
     grid-area: line3;
+    display: flex;
+    flex-direction: column;
+}
+
+.topicImagesRight{
+    grid-area: image2;
     display: flex;
     flex-direction: column;
 }
@@ -336,7 +382,7 @@ abbr{
     background-color: #2c2e2c;
     margin: 10px;
     padding: 30px;
-    border-radius: 20px 20px 100px 100px;
+    border-radius: 0px 0px 100px 100px;
     text-align: center;
     font-size: x-large;
 }
@@ -484,7 +530,7 @@ abbr{
     max-height: 50rem;
 }
 
-#softSkills{
+#bigViewSoftSkills{
     margin: 0px 10px;
     display: grid;
     grid-template-areas: 
@@ -498,8 +544,35 @@ abbr{
     ;
 }
 
-#leftImages{
+#smallViewSoftSkills{
+    display: none;
+}
+
+#leftImageBackground{
     grid-area: leftImage;
+    text-align: center;
+    background-color: #2c2e2c;
+    width: 98%;
+    height: 98%;
+    max-height: 600px;
+    margin: 2% 2% 0px 0;
+    border-radius: 5%;
+}
+
+#leftImageBorder{
+    background-color: #1e1f1d;
+    width: 96%;
+    height: 96%;
+    max-height: 560px;
+    margin: 2%;
+    border-radius: 5%;
+}
+
+#leftImage{
+    width: 96%;
+    height: 96%;
+    max-height: 520px;
+    margin: 2%;
 }
 
 #connectionFourth,#transitionFourth,#socials,#connectionFifth{
@@ -564,8 +637,31 @@ abbr{
     border-radius: 5px;
 }
 
-#rightImages{
+#rightImageBackground{
     grid-area: rightImage;
+    text-align: center;
+    background-color: #2c2e2c;
+    width: 98%;
+    height: 98%;
+    max-height: 600px;
+    margin: 2% 0px 0px 2%;
+    border-radius: 5%;
+}
+
+#rightImageBorder{
+    background-color: #1e1f1d;
+    width: 96%;
+    height: 96%;
+    max-height: 560px;
+    margin: 2%;
+    border-radius: 5%;
+}
+
+#rightImage{
+    width: 96%;
+    height: 96%;
+    max-height: 520px;
+    margin: 2%;
 }
 
 #connectionSixth{
@@ -745,6 +841,102 @@ input:hover{
 
 }
 
+@media (max-width:1250px) {
+    
+    #bigViewDesign{
+        display: none;
+    }
+
+    #smallViewDesign{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        gap: 10px;
+    }
+
+    .outterTopicImageBorder{
+        width: auto;
+    }
+
+    #connection3LineLeft{
+        height: 100px;
+    }
+
+    .topic a{
+        border-radius: 0 0 50px 50px;
+    }
+
+    .connectionLines{
+        padding: 20px 5px;
+    }
+
+    .topicImages{
+        margin-top: 2.5px;
+    }
+
+    .outterTopicImageBorder{
+        text-align: center;
+        background-color: #2c2e2c;
+        width: 98%;
+        height: 98%;
+        margin: 2% 2% 0px 0;
+        border-radius: 5%;
+    }
+    
+    .innerTopicImageBorder{
+        background-color: #1e1f1d;
+        width: 96%;
+        height: 96%;
+        margin: 2%;
+        border-radius: 5%;
+    }
+    
+    .topicImages{
+        width: 96%;
+        height: 96%;
+        margin: 2%;
+    }
+
+    #bigViewSoftSkills{
+        display: none;
+    }
+
+    #smallViewSoftSkills{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .connectionSkillSection{
+        text-align: center;
+    }
+
+    #connection4Line{
+        height: 100px;
+    }
+
+    .connectionSkillLine{
+        background-color: white;
+        width: 10px;
+        height: 50px;
+        margin: 10px auto 10px auto;
+        border-radius: 5px;
+    }
+
+    #leftImageBackground{
+        margin: auto;
+    }
+
+    #socials{
+        max-width: 230px;
+        margin: auto;
+    }
+
+    #rightImageBackground{
+        margin: auto;
+    }
+
+}
+
 @media only screen and (max-width:799px) and (min-width:599px){
 
     nav{
@@ -917,6 +1109,16 @@ input:hover{
         margin-bottom: 5px;
     }
 
+    form{
+        text-align: center;
+    }
 
+    label{
+        margin: auto;
+    }
+
+    input[type="submit"]{
+        margin:0 auto;
+    }
 
 }
