@@ -370,7 +370,7 @@ abbr{
     display: grid;
     gap: 10px;
     grid-template-areas: 
-    'languageSelector body body body body body body body body body body body body body body body body body body'
+    'languageSelector   body body body body body body body body body body body body body body body'
 }
 
 #programmingHeader{
@@ -378,6 +378,7 @@ abbr{
     grid-area: languageSelector;
     margin: 10px 0 0 10px;
     border-radius: 10px;
+    min-width: 220px;
 }
 
 #languageSelector{
@@ -408,6 +409,7 @@ abbr{
 
 #languageSelector ul li ul li{
     margin-bottom: 5px;
+    text-align: left;
 }
 
 #languageButton{
@@ -429,6 +431,7 @@ abbr{
 .languageSelectorButtons{
     background-color: #1e1f1d;
     color: white;
+    margin-bottom: 5px;
 }
 
 .languageSelectorButtons:hover{
@@ -439,6 +442,7 @@ abbr{
 .projectSelectorButtons{
     background-color: #1e1f1d;
     color: white;
+    font-size: large;
 }
 
 .projectSelectorButtons:hover{
@@ -457,7 +461,8 @@ abbr{
     background-color: #1e1f1d;
     padding: 10px;
     border-radius: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
+    overflow: auto;
 }
 
 #languageDirectory a{
@@ -583,7 +588,41 @@ abbr{
 
 
 
+#returnButton{
+    background-color: #2c2e2c;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    opacity: 0.8;
+}
 
+#returnButton:hover{
+    opacity: 1;
+}
+
+#returnButton div:hover{
+    background-color: #58416d;
+    border-radius: 5px;
+}
+
+#returnButton div{
+    width: 60px;
+    height: 60px;
+    background-color: #1e1f1d;
+    border-radius: 5px;
+}
+
+#returnButtonLink{
+    text-decoration: none;
+    font-size: 45px;
+    text-align: center;
+    color: white;
+}
 
 footer{
     text-align: left;
@@ -641,7 +680,7 @@ input[type="submit"]{
     font-size: larger;
     border-radius: 10px;
     background-color: #58416d;
-    margin-left: 50px;
+    margin-left: 90px;
 }
 
 input:hover{
@@ -653,7 +692,7 @@ input:hover{
 @media only screen and (min-width:2560px){
 
     #PCBImage{
-        width: 2560px;
+        width: 2540px;
         height: 1440px;
     }
 
@@ -662,24 +701,24 @@ input:hover{
 @media only screen and (min-width:1920px) and (max-width:2559px){
 
     #PCBImage{
-        width: 1920px;
+        width: 1900px;
         height: 1080px;
     }
 
     #ALU1{
-        width: 1850px;
+        width: 1840px;
     }
 }
 
 @media only screen and (min-width:1280px) and (max-width:1919px){
 
     #PCBImage{
-        width: 1280px;
+        width: 1260px;
         height: 720px;
     }
 
     #ALU1{
-        width: 1210px;
+        width: 1200px;
     }
 
 }
@@ -696,13 +735,13 @@ input:hover{
 @media only screen and (min-width:800px) and (max-width:1279px){
 
     #PCBImage{
-        width: 800px;
-        height: 600px;
+        width: 780px;
+        height: 438px;
         
     }
 
     #ALU1{
-        width: 740px;
+        width: 720px;
     }
 
 }
@@ -856,6 +895,7 @@ input:hover{
     
     #ALU3{
         width: 75%;
+        margin: auto;
     }
 
     #programming{
@@ -875,6 +915,7 @@ input:hover{
 
     #languageDirectory{
         margin-top: 0px;
+        margin-bottom: 5px;
     }
 
 
