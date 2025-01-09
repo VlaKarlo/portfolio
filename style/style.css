@@ -386,10 +386,6 @@ abbr{
     background-color: #1e1f1d;
 }
 
-#languageSelector h2{
-    margin-left: 10px;
-}
-
 #languageSelector h2 span{
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -416,7 +412,8 @@ abbr{
     background-color: #1e1f1d;
     color: white;
     border-radius: 10px;
-
+    font-size: large;
+    margin-left: 10px;
 }
 
 #languageButton:hover{
@@ -432,6 +429,8 @@ abbr{
     background-color: #1e1f1d;
     color: white;
     margin-bottom: 5px;
+    margin-left: 10px;
+    font-size: large;
 }
 
 .languageSelectorButtons:hover{
