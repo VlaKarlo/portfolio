@@ -79,7 +79,7 @@ function resetFrontendPriority(){
     document.getElementById("JS").style.display = "block";
     document.getElementById("frontendJSTab").style.backgroundColor = "#1e1f1d";
     document.getElementById("JSButton").style.backgroundColor = "#1e1f1d";
-    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo";
+    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend";
 
     writeHTMLCode();
     writeCSSCode();
@@ -99,7 +99,7 @@ function makeHTMLPriority(){
     document.getElementById("JS").style.display = "none";
     document.getElementById("frontendJSTab").style.backgroundColor = "#1e1f1d";
     document.getElementById("JSButton").style.backgroundColor = "#1e1f1d";
-    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/HTML";
+    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend/HTML";
 
     writeHTMLCode();
     clearCSSCode();
@@ -119,7 +119,7 @@ function makeCSSPriority(){
     document.getElementById("JS").style.display = "none";
     document.getElementById("frontendJSTab").style.backgroundColor = "#1e1f1d";
     document.getElementById("JSButton").style.backgroundColor = "#1e1f1d";
-    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/CSS";
+    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend/CSS";
 
     clearHTMLCode();
     writeCSSCode();
@@ -139,7 +139,7 @@ function makeJSPriority(){
     document.getElementById("JS").style.display = "block";
     document.getElementById("frontendJSTab").style.backgroundColor = "#58416d";
     document.getElementById("JSButton").style.backgroundColor = "#58416d";
-    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/JS";
+    document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend/JS";
 
     clearHTMLCode();
     clearCSSCode();
@@ -285,8 +285,8 @@ function toggleLanguagesDisplay() {
     for(let i = 0; i < tag.length; i++){
         tag[i].innerHTML = ">";
     }
-    document.getElementById("languageDirectoryURL").href = "https://github.com/vlaKarlo/programming";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming";
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming";
 } 
 
 function togglePythonProjectsDisplay() {
@@ -307,8 +307,8 @@ function togglePythonProjectsDisplay() {
     else{
         document.getElementById("python").innerHTML = '<span class="languageDropdownIndicator">></span> Python';
     }
-    document.getElementById("languageDirectoryURL").href = "https://github.com/vlaKarlo/programming/python";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming/python";
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/python";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/python";
 } 
 
 function toggleArduinoProjectsDisplay() {
@@ -329,8 +329,8 @@ function toggleArduinoProjectsDisplay() {
     else{
         document.getElementById("arduino").innerHTML = '<span class="languageDropdownIndicator">></span> Arduino';
     }
-    document.getElementById("languageDirectoryURL").href = "https://github.com/vlaKarlo/programming/arduino";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming/arduino";
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino";
 }
 
 function toggleCProjectsDisplay() {
@@ -351,8 +351,8 @@ function toggleCProjectsDisplay() {
     else{
         document.getElementById("C").innerHTML = '<span class="languageDropdownIndicator">></span> C';
     }
-    document.getElementById("languageDirectoryURL").href = "https://github.com/vlaKarlo/programming/C";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming/C";
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/C";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/C";
 } 
 
 function toggleCPlusPlusProjectsDisplay() {
@@ -373,8 +373,8 @@ function toggleCPlusPlusProjectsDisplay() {
     else{
         document.getElementById("C++").innerHTML = '<span class="languageDropdownIndicator">></span> C++';
     }
-    document.getElementById("languageDirectoryURL").href = "https://github.com/vlaKarlo/programming/C++";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming/C++";
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/C++";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/C++";
 } 
 
 function toggleCSharpProjectsDisplay() {
@@ -395,12 +395,12 @@ function toggleCSharpProjectsDisplay() {
     else{
         document.getElementById("C#").innerHTML = '<span class="languageDropdownIndicator">></span> C#';
     }
-    document.getElementById("languageDirectoryURL").href = "https://github.com/vlaKarlo/programming/C#";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming/C#";
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/C#";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/C#";
 } 
 
 function showWebDevProject(){
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming/python/WebDev";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/WebDev";
     document.getElementById("languageCode").innerHTML = 
     `
 
@@ -409,8 +409,8 @@ function showWebDevProject(){
 }
 
 function showASVProject(){
-    document.getElementById("languageDirectoryURL").href = "https://github.com/vlaKarlo/programming/arduino/ASV";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/vlaKarlo/programming/arduino/ASV";
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/ASV";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/ASV";
     document.getElementById("languageCode").innerHTML = 
     `
     <p>
