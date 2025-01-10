@@ -361,9 +361,12 @@ abbr{
 
 .topicImages{
     max-height: 400px;
-    max-width: 400px;
-    margin: 10px auto 0 auto;
+    max-width: 96%;
+    margin: 1% auto 1% auto;
+    border-radius: 20px;
 }
+
+
 
 .ImageLeftImageRightLines{
     grid-area: line3;

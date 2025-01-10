@@ -79,6 +79,7 @@ function resetFrontendPriority(){
     document.getElementById("JS").style.display = "block";
     document.getElementById("frontendJSTab").style.backgroundColor = "#1e1f1d";
     document.getElementById("JSButton").style.backgroundColor = "#1e1f1d";
+    document.getElementById("frontendURLLink").href = "https://github.com/VlaKarlo/Projects/tree/main/frontend";
     document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend";
 
     writeHTMLCode();
@@ -99,6 +100,7 @@ function makeHTMLPriority(){
     document.getElementById("JS").style.display = "none";
     document.getElementById("frontendJSTab").style.backgroundColor = "#1e1f1d";
     document.getElementById("JSButton").style.backgroundColor = "#1e1f1d";
+    document.getElementById("frontendURLLink").href = "https://github.com/VlaKarlo/Projects/tree/main/frontend/HTML";
     document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend/HTML";
 
     writeHTMLCode();
@@ -119,6 +121,7 @@ function makeCSSPriority(){
     document.getElementById("JS").style.display = "none";
     document.getElementById("frontendJSTab").style.backgroundColor = "#1e1f1d";
     document.getElementById("JSButton").style.backgroundColor = "#1e1f1d";
+    document.getElementById("frontendURLLink").href = "https://github.com/VlaKarlo/Projects/tree/main/frontend/CSS";
     document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend/CSS";
 
     clearHTMLCode();
@@ -139,6 +142,7 @@ function makeJSPriority(){
     document.getElementById("JS").style.display = "block";
     document.getElementById("frontendJSTab").style.backgroundColor = "#58416d";
     document.getElementById("JSButton").style.backgroundColor = "#58416d";
+    document.getElementById("frontendURLLink").href = "https://github.com/VlaKarlo/Projects/tree/main/frontend/JS";
     document.getElementById("frontendURLText").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/frontend/JS";
 
     clearHTMLCode();
