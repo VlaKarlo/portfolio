@@ -551,6 +551,10 @@ abbr{
     display: none;
 }
 
+.socialSkillsImages{
+    border-radius: 5%;
+}
+
 #leftImageBackground{
     grid-area: leftImage;
     text-align: center;
