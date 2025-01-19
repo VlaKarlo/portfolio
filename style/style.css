@@ -187,6 +187,7 @@ abbr{
     border-radius: 10px;
     text-align: left;
     background-color: #1e1f1d;
+    overflow: auto;
 }
 
 #frontendURL a{
