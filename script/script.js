@@ -55,6 +55,9 @@ window.onload = function(){
 
     toggleLanguagesDisplay();
     resetFrontendPriority();
+    toggleLanguagesDisplay();
+    togglePythonProjectsDisplay();
+    showPythonAmazonTrackerProject();
 
 };
 
