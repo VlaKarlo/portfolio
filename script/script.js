@@ -403,18 +403,338 @@ function toggleCSharpProjectsDisplay() {
     document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/C#";
 } 
 
-function showWebDevProject(){
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/WebDev";
+function showPythonAmazonTrackerProject(){
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/amazonTracker";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/amazonTracker";
     document.getElementById("languageCode").innerHTML = 
     `
-
+    <p>
+import requests<br>
+from bs4 import BeautifulSoup<br>
+import smtplib<br>
+<br>
+header={<br>
+&emsp;"Accept-Language": "en-US;q=0.8,en;q=0.7",<br>
+&emsp;"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 "<br>
+&emsp;"Safari/537.36",<br>
+&emsp;"Accept-Charset": "uft-8" <br>
+}<br>
+<br>
+PRODUCT = "ProductUrl"<br>
+<br>
+response = requests.get(<br>
+&emsp;url=PRODUCT,<br>
+&emsp;headers=header<br>
+&emsp;)<br>
+content = response.text<br>
+soup = BeautifulSoup(content,"lxml")<br>
+<br>
+price=soup.find(class_="a-offscreen").get_text()<br>
+<br>
+price = price[1:].split(',')<br>
+price= float(price[0]) * 1000 + float(price[1])<br>
+<br>
+# --------------------------- MAIL SENDER -------------------------------- #<br>
+<br>
+if price&#60;1600:<br>
+&emsp;myEmail = "mail@gmail.com"<br>
+&emsp;password = "password"<br>
+&emsp;recieverMail = "mail@gmail.com"<br>
+<br>
+&emsp;def sendMail():<br>
+&emsp;&emsp;with smtplib.SMTP("smtp.gmail.com") as connection:<br>
+&emsp;&emsp;&emsp;connection.starttls()<br>
+&emsp;&emsp;&emsp;connection.login(user=myEmail,password=password)<br>
+&emsp;&emsp;&emsp;connection.sendmail(<br>
+&emsp;&emsp;&emsp;&emsp;from_addr=myEmail,<br>
+&emsp;&emsp;&emsp;&emsp;to_addrs=recieverMail,<br>
+&emsp;&emsp;&emsp;&emsp;msg=f"Subject:Buy the product\n\n{PRODUCT}"<br>
+&emsp;&emsp;&emsp;)<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;sendMail()
+                    </p>
     `
     ;
 }
 
-function showASVProject(){
-    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/ASV";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/ASV";
+function showPythonWebScrapingProject(){
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/webScraping";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/webScraping";
+    document.getElementById("languageCode").innerHTML = 
+    `
+    <p>
+import requests<br>
+from bs4 import BeautifulSoup<br>
+<br>
+response = requests.get("https://news.ycombinator.com/")<br>
+content = response.text<br>
+<br>
+soup = BeautifulSoup(content,"html.parser")<br>
+<br>
+finder = soup.find(class_="titleline")<br>
+print(finder.getText())<br>
+<br>
+finder = soup.find(["titleline","a"])<br>
+print(finder.get("href"))<br>
+<br>
+finder = soup.find(class_="score")<br>
+print(finder.getText())<br>
+<br>
+print("\n")<br>
+<br>
+<br>
+articles=soup.find_all(class_="titleline")<br>
+articleTitles=[]<br>
+articleLinks=[]<br>
+for article in articles:<br>
+&emsp;title=article.getText()<br>
+&emsp;articleTitles.append(title)<br>
+&emsp;link=article.find("a").get("href")<br>
+&emsp;articleLinks.append(link)<br>
+<br>
+scores=soup.find_all(class_="score")<br>
+articlePoints=[]<br>
+for score in scores:<br>
+&emsp;articlePoints.append(int(score.getText().split()[0]))<br>
+&emsp;<br>
+print(articleTitles)<br>
+print(articleLinks)<br>
+print(articlePoints)
+                    </p>
+    `
+    ;
+}
+
+function showPythonAppProject(){
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/pomodoro";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/pomodoro";
+    document.getElementById("languageCode").innerHTML = 
+    `
+    <p>
+from tkinter import *<br>
+import math<br>
+<br>
+# ---------------------------- CONSTANTS ------------------------------- #<br>
+PINK = "#e2979c"<br>
+RED = "#e7305b"<br>
+GREEN = "#9bdeac"<br>
+YELLOW = "#f7f5dd"<br>
+FONT_NAME = "Courier"<br>
+WORK_MIN = 25<br>
+SHORT_BREAK_MIN = 5<br>
+LONG_BREAK_MIN = 20<br>
+reps=0<br>
+timer=None<br>
+<br>
+# ---------------------------- TIMER RESET ------------------------------- # <br>
+def resetTimer():<br>
+&emsp;global timer<br>
+&emsp;window.after_cancel(timer)<br>
+&emsp;labelTitle.config(text="Timer",fg=GREEN)<br>
+&emsp;canvas.itemconfig(timertext,text="00:00")<br>
+&emsp;checkmarkLabel.config(text="")<br>
+&emsp;global reps<br>
+&emsp;reps=0<br>
+&emsp;startTimer()<br>
+# ---------------------------- TIMER MECHANISM ------------------------------- # <br>
+def startTimer():<br>
+&emsp;global reps<br>
+&emsp;reps+=1<br>
+&emsp;if reps==9:<br>
+&emsp;&emsp;labelTitle.config(text="Long Break",fg=RED)<br>
+&emsp;&emsp;countDown(LONG_BREAK_MIN*60)<br>
+&emsp;elif reps%2:<br>
+&emsp;&emsp;global checkmarks<br>
+&emsp;&emsp;labelTitle.config(text="Work Time",fg=GREEN)<br>
+&emsp;&emsp;countDown(WORK_MIN*60)<br>
+&emsp;&emsp;checkmarks=""<br>
+&emsp;&emsp;for x in range(math.floor(reps/2)):<br>
+&emsp;&emsp;&emsp;checkmarks+="✔"<br>
+&emsp;&emsp;checkmarkLabel.config(text=checkmarks)<br>
+&emsp;else:<br>
+&emsp;&emsp;labelTitle.config(text="Short Break",fg=PINK)<br>
+&emsp;&emsp;countDown(SHORT_BREAK_MIN*60)<br>
+<br>
+# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # <br>
+def countDown(count):<br>
+&emsp;minutes=math.floor(count/60)<br>
+&emsp;seconds=count%60<br>
+&emsp;<br>
+&emsp;if seconds&#60;10:<br>
+&emsp;&emsp;seconds=f"0{seconds}"<br>
+&emsp;&emsp;<br>
+&emsp;<br>
+&emsp;canvas.itemconfig(timertext,text=f"{minutes}:{seconds}")<br>
+&emsp;<br>
+&emsp;if count&#62;0:<br>
+&emsp;&emsp;global timer<br>
+&emsp;&emsp;timer = window.after(1000,countDown,count-1)<br>
+&emsp;else:<br>
+&emsp;&emsp;timer =  window.after(1000,startTimer)<br>
+# ---------------------------- UI SETUP ------------------------------- #<br>
+window = Tk()<br>
+window.title("Pomodoro")<br>
+window.config(padx=100,pady=50,bg=YELLOW)<br>
+<br>
+canvas = Canvas(width=210,height=225,bg=YELLOW,highlightthickness=0)<br>
+tomatoImage = PhotoImage(file="D:/VSCProj/ProjectPython/Day 28 - Pomodoro/tomato.png")<br>
+canvas.create_image(105,112,image=tomatoImage)<br>
+timertext = canvas.create_text(103,130,text="00:00",fill="white",font=(FONT_NAME, 35, "bold"))<br>
+canvas.grid(row=1,column=1)<br>
+<br>
+labelTitle = Label(text="Timer",fg=GREEN,font=(FONT_NAME,40,"bold"),bg=YELLOW)<br>
+labelTitle.grid(row=0,column=1)<br>
+<br>
+buttonStart = Button(text="Start", command=startTimer,highlightthickness=0)<br>
+buttonStart.grid(row=2,column=0)<br>
+<br>
+buttonReset = Button(text="Reset", command=resetTimer,highlightthickness=0)<br>
+buttonReset.grid(row=2,column=2)<br>
+<br>
+checkmarkLabel = Label(fg=GREEN,font=(FONT_NAME,10,"bold"),bg=YELLOW)<br>
+checkmarkLabel.grid(row=3,column=1)<br>
+<br>
+window.mainloop()
+                    </p>
+    `
+    ;
+}
+
+function showPythonCookieClickerBotProject(){
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/cookieClickerBot";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/python/cookieClickerBot";
+    document.getElementById("languageCode").innerHTML = 
+    `
+    <p>
+from selenium import webdriver<br>
+from selenium.webdriver.common.by import By<br>
+import time<br>
+<br>
+driver = webdriver.Firefox()<br>
+driver.get("http://orteil.dashnet.org/experiments/cookie/")<br>
+<br>
+cookie = driver.find_element(By.ID,value="cookie")<br>
+buyCursor = driver.find_element(By.ID,value="buyCursor")<br>
+buyGrandma = driver.find_element(By.ID,value="buyGrandma")<br>
+buyFactory = driver.find_element(By.ID,value="buyFactory")<br>
+buyMine = driver.find_element(By.ID,value="buyMine")<br>
+buyShipment = driver.find_element(By.ID,value="buyShipment")<br>
+buyLab = driver.find_element(By.ID,value="buyAlchemy lab")<br>
+buyPortal = driver.find_element(By.ID,value="buyPortal")<br>
+buyTimeMachine = driver.find_element(By.ID,value="buyTime machine")<br>
+money = int(driver.find_element(By.ID,value="money").text)<br>
+<br>
+def turnToPrice(price):<br>
+&emsp;price = price.split(',')[::-1]<br>
+&emsp;priceNumber = 0<br>
+&emsp;for x in range(len(price)):<br>
+&emsp;&emsp;priceNumber = priceNumber + int(price[x]) * pow(1000,x)<br>
+&emsp;return priceNumber<br>
+<br>
+lowestPrice = int(buyCursor.find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+grandmaPrice = int(buyGrandma.find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+factoryPrice = int(buyFactory.find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+minePrice = turnToPrice(buyMine.find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+shipmentPrice = turnToPrice(buyShipment.find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+labPrice = turnToPrice(buyLab.find_element(By.TAG_NAME,value="b").text.split(' ')[3])<br>
+portalPrice = turnToPrice(buyPortal.find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+timeMachinePrice = turnToPrice(buyTimeMachine.find_element(By.TAG_NAME,value="b").text.split(' ')[3])<br>
+<br>
+def updateStore():<br>
+&emsp;global buyCursor,buyGrandma,buyFactory,buyMine,buyShipment,buyLab,buyPortal,buyTimeMachine<br>
+&emsp;buyCursor = driver.find_element(By.ID,value="buyCursor")<br>
+&emsp;buyGrandma = driver.find_element(By.ID,value="buyGrandma")<br>
+&emsp;buyFactory = driver.find_element(By.ID,value="buyFactory")<br>
+&emsp;buyMine = driver.find_element(By.ID,value="buyMine")<br>
+&emsp;buyShipment = driver.find_element(By.ID,value="buyShipment")<br>
+&emsp;buyLab = driver.find_element(By.ID,value="buyAlchemy lab")<br>
+&emsp;buyPortal = driver.find_element(By.ID,value="buyPortal")<br>
+&emsp;buyTimeMachine = driver.find_element(By.ID,value="buyTime machine")<br>
+<br>
+def checkPrices():<br>
+&emsp;global lowestPrice,grandmaPrice,factoryPrice,minePrice,shipmentPrice,labPrice,portalPrice,timeMachinePrice,money<br>
+&emsp;lowestPrice = turnToPrice(driver.find_element(By.ID,value="buyCursor").find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+&emsp;grandmaPrice = turnToPrice(driver.find_element(By.ID,value="buyGrandma").find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+&emsp;factoryPrice = turnToPrice(driver.find_element(By.ID,value="buyFactory").find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+&emsp;minePrice = turnToPrice(driver.find_element(By.ID,value="buyMine").find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+&emsp;shipmentPrice = turnToPrice(driver.find_element(By.ID,value="buyShipment").find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+&emsp;labPrice = turnToPrice(driver.find_element(By.ID,value="buyAlchemy lab").find_element(By.TAG_NAME,value="b").text.split(' ')[3])<br>
+&emsp;portalPrice = turnToPrice(driver.find_element(By.ID,value="buyPortal").find_element(By.TAG_NAME,value="b").text.split(' ')[2])<br>
+&emsp;timeMachinePrice = turnToPrice(driver.find_element(By.ID,value="buyTime machine").find_element(By.TAG_NAME,value="b").text.split(' ')[3])<br>
+&emsp;money = driver.find_element(By.ID,value="money").text<br>
+&emsp;if "," in money:<br>
+&emsp;&emsp;money = turnToPrice(money)<br>
+<br>
+def buyStuff():<br>
+&emsp;<br>
+&emsp;money = int(driver.find_element(By.ID,value="money").text)<br>
+&emsp;checkPrices()<br>
+&emsp;while money &#62;= lowestPrice:<br>
+&emsp;&emsp;<br>
+&emsp;&emsp;if money &#62; timeMachinePrice:<br>
+&emsp;&emsp;&emsp;buyTimeMachine.click()<br>
+&emsp;&emsp;&emsp;money -= timeMachinePrice<br>
+&emsp;&emsp;&emsp;print("Bought Time Machine")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;elif money &#62; portalPrice:<br>
+&emsp;&emsp;&emsp;buyPortal.click()<br>
+&emsp;&emsp;&emsp;money -= portalPrice<br>
+&emsp;&emsp;&emsp;print("Bought Portal")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;elif money &#62; labPrice:<br>
+&emsp;&emsp;&emsp;buyLab.click()<br>
+&emsp;&emsp;&emsp;money -= labPrice<br>
+&emsp;&emsp;&emsp;print("Bought Lab")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;elif money &#62; shipmentPrice:<br>
+&emsp;&emsp;&emsp;buyShipment.click()<br>
+&emsp;&emsp;&emsp;money -= shipmentPrice<br>
+&emsp;&emsp;&emsp;print("Bought Shipment")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;elif money &#62; minePrice:<br>
+&emsp;&emsp;&emsp;buyMine.click()<br>
+&emsp;&emsp;&emsp;money -= minePrice<br>
+&emsp;&emsp;&emsp;print("Bought Mine")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;elif money &#62; factoryPrice:<br>
+&emsp;&emsp;&emsp;buyFactory.click()<br>
+&emsp;&emsp;&emsp;money -= factoryPrice<br>
+&emsp;&emsp;&emsp;print("Bought Factory")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;elif money &#62; grandmaPrice:<br>
+&emsp;&emsp;&emsp;buyGrandma.click()<br>
+&emsp;&emsp;&emsp;money -= grandmaPrice<br>
+&emsp;&emsp;&emsp;print("Bought Grandma")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;else:<br>
+&emsp;&emsp;&emsp;buyCursor.click()<br>
+&emsp;&emsp;&emsp;money -= lowestPrice<br>
+&emsp;&emsp;&emsp;print("Bought Cursor")<br>
+&emsp;&emsp;&emsp;<br>
+&emsp;&emsp;checkPrices()<br>
+&emsp;&emsp;updateStore()<br>
+&emsp;<br>
+<br>
+startTime = time.time()<br>
+lastCheckedTime = time.time()<br>
+while True:<br>
+&emsp;cookie.click()<br>
+&emsp;<br>
+&emsp;if time.time() - lastCheckedTime &#62; 5:<br>
+&emsp;&emsp;lastCheckedTime = time.time()<br>
+&emsp;&emsp;buyStuff()<br>
+&emsp;<br>
+&emsp;if time.time() - startTime &#62; 300:<br>
+&emsp;&emsp;break<br>
+&emsp;
+                    </p>
+    `
+    ;
+}
+
+function showVaultDoorProject(){
+    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/vaultDoor";
+    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/vaultDoor";
     document.getElementById("languageCode").innerHTML = 
     `
     <p>
@@ -489,711 +809,3 @@ function showASVProject(){
     `
     ;
 }
-
-
-function showWSProject(){
-    document.getElementById("languageDirectoryURL").href = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/ASV";
-    document.getElementById("languageDirectoryURL").innerHTML = "https://github.com/VlaKarlo/Projects/tree/main/programming/arduino/ASV";
-    document.getElementById("languageCode").innerHTML = 
-    `
-    <p>
-
-&#60;!DOCTYPE html&#62;<br>
-&#60;html lang="en"&#62;<br>
-&#60;head&#62;<br>
-&emsp;&#60;meta charset="UTF-8"&#62;<br>
-&emsp;&#60;meta name="viewport" content="width=device-width, initial-scale=1.0"&#62;<br>
-&emsp;&#60;title&#62;Karlo Vlašić&#60;/title&#62;<br>
-&emsp;&#60;link rel="icon" type="image/x-icon" href="images/favicon.ico"&#62;<br>
-&emsp;&#60;link rel="stylesheet" href="style/style.css"&#62;<br>
-&emsp;&#60;script src="script/script.js"&#62;&#60;/script&#62;<br>
-&emsp;&#60;link rel="preconnect" href="https://fonts.googleapis.com"&#62;<br>
-&emsp;&#60;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&#62;<br>
-&emsp;&#60;link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"&#62;<br>
-&#60;/head&#62;<br>
-&#60;body&#62;<br>
-<br>
-&emsp;&#60;header id="start"&#62;&#60;/header&#62;<br>
-<br>
-&emsp;&#60;nav&#62;<br>
-&emsp;&emsp;&#60;ul&#62;<br>
-&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="#frontend"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Frontend<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="#graphicDesign"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Graphic Design<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="#programming"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Programming<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="#python"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Python<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="#softSkills"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Soft Skills<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&#60;/ul&#62;<br>
-&emsp;&#60;/nav&#62;<br>
-<br>
-&emsp;&#60;main&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="profile"&#62;<br>
-&emsp;&emsp;&emsp;&#60;img id="profilePicture" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="PCB"&#62;<br>
-&emsp;&emsp;&emsp;&#60;img id="PCBImage" src="images/map/map.png" usemap="#PCB"&#62;<br>
-&emsp;&emsp;&emsp;&#60;map id="imageMap" name="PCB"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="frontendShape" shape="rect" coords="412,795,720,918" alt="frontend" href="#frontend"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="graphicShape" shape="rect" coords="1562,55,1783,344" alt="graphicDesign" href="#graphicDesign"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="pythonShape" shape="rect" coords="72,724,276,830" alt="python" href="#programming"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="softSkillsShape" shape="rect" coords="217,52,371,211" alt="softSkills" href="#softSkills"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="CShape" shape="rect" coords="898,781,985,936" alt="C" href="#programming"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="C++Shape" shape="rect" coords="1240,913,1395,1000" alt="C++" href="#programming"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="C#Shape" shape="rect" coords="1240,740,1395,830" alt="C#" href="#programming"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;area id="arduinoShape" shape="rect" coords="1615,800,1822,912" alt="arduino" href="#programming"&#62;<br>
-&emsp;&emsp;&emsp;&#60;/map&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="transitionFirst"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="ALU1"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/frontend"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Frontend<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="connectionFirst"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="connection1"&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="frontend"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="page"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="frontendHeader"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="frontendHeaderTab" class="frontendTabs"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/favicon.ico" width="32" height="32"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="frontendButton" class="frontendButtons" onclick="resetFrontendPriority()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Frontend<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;X<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="frontendHTMLTab" class="frontendTabs"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/htmlIcon.png" width="32" height="32"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="HTMLButton" class="frontendButtons" onclick="makeHTMLPriority()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;abbr title="Hyper Text Markup Language"&#62;HTML&#60;/abbr&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;X<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="frontendCSSTab" class="frontendTabs"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/css.png" width="32" height="32"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="CSSButton" class="frontendButtons" onclick="makeCSSPriority()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;abbr title="Cascading Style Sheet"&#62;CSS&#60;/abbr&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;X<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="frontendJSTab" class="frontendTabs"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/js.png" width="26" height="28"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="JSButton" class="frontendButtons" onclick="makeJSPriority()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;abbr title="Javascript"&#62;JS&#60;/abbr&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;X<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="frontendURL"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a id="frontendURLLink" href="https://github.com/VlaKarlo/Projects/tree/main/frontend"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3 id="frontendURLText"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;https://github.com/VlaKarlo/Projects/tree/main/frontend<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="frontendBody"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="HTML"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;abbr title="Hyper Text Markup Language"&#62;index.html&#60;/abbr&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;p id="HTMLBody"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/p&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="CSS"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;abbr title="Cascading Style Sheet"&#62;style.css&#60;/abbr&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;p id="CSSBody"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/p&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="JS"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;abbr title="Javascript"&#62;script.js&#60;/abbr&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;p id="JSBody"&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/p&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="connectionSecond"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="connection2Line1"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="connection2Line2"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="connection2Line3"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="transitionSecond"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="ALU2"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Graphic Design<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="graphicDesign"&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&#60;div id="bigViewDesign"&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="connection3LineLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topic"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/design"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="design"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Design<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/webDesign"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="webDesign"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Web Design<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/models"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="models"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Modelling<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/animations"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="animations"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Animations<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImageLeftLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="designLeft" src="images/Poster.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="webDesignLeft" src="images/webDesignLeft.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="modellingLeft" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="animationLeft" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="ImageLeftImageRightLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesRight"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="designRight" src="images/designRight.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="webDesignRight" src="images/webDesignRight.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="modellingRight" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="animationRight" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&#60;div id="smallViewDesign"&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="connection3LineLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topic"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/design"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="design"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Design<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="designLeft" src="images/Poster.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesRight"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="designRight" src="images/designRight.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topic"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/webDesign"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="webDesign"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Web Design<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="webDesignLeft" src="images/webDesignLeft.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesRight"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="webDesignRight" src="images/webDesignRight.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topic"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/models"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="models"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Modelling<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="modellingLeft" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesRight"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="modellingRight" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topic"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/graphicDesign/animations"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h4 id="animations"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Animations<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h4&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="animationLeft" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionTopicLines"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionLines"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="topicImagesRight"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="outterTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="innerTopicImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img class="topicImages" id="animationRight" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="connection3LineLeft"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="transitionThird"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="ALU3"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/programming"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Programming<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="connectionThird"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="connection3Line"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/section&#62;&emsp;&emsp;<br>
-<br>
-&emsp;&emsp;&#60;section id="programming"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="programmingHeader"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="languageSelector"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="languageButton" onclick="toggleLanguagesDisplay()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2 id="languageButtonText"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;span&#62;v&#60;/span&#62; Languages<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="pythonButton" class="languageSelectorButtons" onclick="togglePythonProjectsDisplay()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3 id="python"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;span class="languageDropdownIndicator"&#62;v&#60;/span&#62; Python<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons pythonProjects" onclick="showWebDevProject()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Web Dev<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons pythonProjects"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Web Scraping<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons pythonProjects"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Apps<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons pythonProjects"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Data Visualisation<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="arduinoButton" class="languageSelectorButtons" onclick="toggleArduinoProjectsDisplay()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3 id="arduino"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;span class="languageDropdownIndicator"&#62;v&#60;/span&#62; Arduino<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons arduinoProjects" onclick="showASVProject()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ASV<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="CButton" class="languageSelectorButtons" onclick="toggleCProjectsDisplay()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3 id="C"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;span class="languageDropdownIndicator"&#62;&#62;&#60;/span&#62; C<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons CProjects"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ASV<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="C++Button" class="languageSelectorButtons" onclick="toggleCPlusPlusProjectsDisplay()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3 id="C++"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;span class="languageDropdownIndicator"&#62;&#62;&#60;/span&#62; C++<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons C++Projects"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ASV<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button id="C#Button" class="languageSelectorButtons" onclick="toggleCSharpProjectsDisplay()"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h3 id="C#"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;span class="languageDropdownIndicator"&#62;&#62;&#60;/span&#62; C#<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h3&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;button class="projectSelectorButtons C#Projects"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ASV<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/button&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/li&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/ul&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="languageBody"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="languageDirectory"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a id="languageDirectoryURL" href="https://github.com/VlaKarlo/Projects/tree/main/programming"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;https://github.com/vlaKarlo/programming<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="languageCode"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;p&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/p&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;img&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-&emsp;&emsp;&#60;section id="softSkills"&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&#60;div id="bigViewSoftSkills"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="leftImageBackground"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="leftImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img id="leftImage" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="connectionFourth"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="connection4Line"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;  <br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="transitionFourth"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="ALU4"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/softSkills"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Soft skills<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="connectionFifth"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="connection5Line"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62; <br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="socials"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://www.facebook.com/"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/socials/fbLogo.png" alt="Facebook Logo" height="64px" width="64px"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://www.instagram.com/"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/socials/igLogo.png" alt="Instagram Logo" height="64px" width="64px"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://hr.linkedin.com/"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/socials/linkedinLogo.png" alt="Linkedin Logo" height="64px" width="64px"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="rightImageBackground"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="rightImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img id="rightImage" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&emsp;&#60;div id="smallViewSoftSkills"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionSkillSection"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="connection4Line"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;  <br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="transitionFourth"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="ALU4"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://github.com/VlaKarlo/Projects/tree/main/softSkills"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Soft skills<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h1&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionSkillSection"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionSkillLine"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62; <br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="leftImageBackground"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="leftImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img id="leftImage" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionSkillSection"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionSkillLine"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62; <br>
-&emsp;&emsp;&emsp;&emsp;&#60;div id="rightImageBackground"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="rightImageBorder"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img id="rightImage" src="images/profile.png"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionSkillSection"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div class="connectionSkillLine"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62; <br>
-&emsp;&emsp;&emsp;&emsp;&#60;div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;div id="socials"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://www.facebook.com/"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/socials/fbLogo.png" alt="Facebook Logo" height="64px" width="64px"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://www.instagram.com/"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/socials/igLogo.png" alt="Instagram Logo" height="64px" width="64px"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;a href="https://hr.linkedin.com/"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;img src="images/socials/linkedinLogo.png" alt="Linkedin Logo" height="64px" width="64px"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-<br>
-<br>
-&emsp;&emsp;&#60;div id="connectionSixth"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="connection6Line"&#62;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/div&#62;  <br>
-<br>
-&emsp;&emsp;&#60;a id="returnButtonLink" href="#start"&#62;<br>
-&emsp;&emsp;&emsp;&#60;div id="returnButton"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;^<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;/h2&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&#60;/a&#62;<br>
-&emsp;&#60;/main&#62;<br>
-<br>
-&emsp;&#60;footer&#62;<br>
-&emsp;&emsp;&#60;section id="contact"&#62;<br>
-&emsp;&emsp;&emsp;&#60;form class="gform" action="https://script.google.com/macros/s/AKfycbyG53E2OWW0ZEUgWHLUbitwT2pZkAynUANHhYr8Tu3QBblXNPuBOdPqyEIyFxb9xbE/exec" method="post" data-email="karlo.vlasic1337@gmail.com"&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;label&#62;E-mail&#60;/label&#62;&#60;br&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;input type="email" id="email" name="email" required &#62;&#60;br&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;label&#62;Subject&#60;/label&#62;&#60;br&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;input type="text" id="subject" name="subject" required &#62;&#60;br&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;label&#62;Message&#60;/label&#62;&#60;br&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&#60;textarea rows="6" cols="20" id="message" name="message" required wrap="hard"&#62;&#60;/textarea&#62;&#60;br&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;/div&#62;<br>
-&emsp;&emsp;&emsp;&emsp;&#60;input type="submit" value="submit" name="submit"&#62;&#60;br&#62;<br>
-&emsp;&emsp;&emsp;&#60;/form&#62;<br>
-&emsp;&emsp;&#60;/section&#62;<br>
-&emsp;&#60;/footer&#62;<br>
-<br>
-&#60;/body&#62;<br>
-&#60;/html&#62;
-`;}
