@@ -58,6 +58,7 @@ window.onload = function(){
     toggleLanguagesDisplay();
     togglePythonProjectsDisplay();
     showPythonAmazonTrackerProject();
+    
 };
 
 window.onscroll = function(){
