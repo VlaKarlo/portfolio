@@ -66,12 +66,12 @@
             <map id="imageMap" name="PCB">
                 <area id="frontendShape" shape="rect" coords="412,795,720,918" alt="frontend" href="#frontend">
                 <area id="graphicShape" shape="rect" coords="1562,55,1783,344" alt="graphicDesign" href="#graphicDesign">
-                <area id="pythonShape" shape="rect" coords="72,724,276,830" alt="python" href="#programming">
+                <area id="pythonShape" shape="rect" coords="72,724,276,830" alt="python" href="#programming" onclick="showPythonProject()">
                 <area id="softSkillsShape" shape="rect" coords="217,52,371,211" alt="softSkills" href="#softSkills">
-                <area id="CShape" shape="rect" coords="898,781,985,936" alt="C" href="#programming">
-                <area id="C++Shape" shape="rect" coords="1240,913,1395,1000" alt="C++" href="#programming">
-                <area id="C#Shape" shape="rect" coords="1240,740,1395,830" alt="C#" href="#programming">
-                <area id="arduinoShape" shape="rect" coords="1615,800,1822,912" alt="arduino" href="#programming">
+                <area id="CShape" shape="rect" coords="898,781,985,936" alt="C" href="#programming" onclick="showCProject()">
+                <area id="C++Shape" shape="rect" coords="1240,913,1395,1000" alt="C++" href="#programming" onclick="showCPlusPlusProject()">
+                <area id="C#Shape" shape="rect" coords="1240,740,1395,830" alt="C#" href="#programming" onclick="showCSharpProject()">
+                <area id="arduinoShape" shape="rect" coords="1615,800,1822,912" alt="arduino" href="#programming" onclick="showArduinoProject()">
             </map>
         </section>
 
@@ -507,7 +507,7 @@
                                 </li>
                             </ul>
                         </li>
-<!--                         
+                         
                         <li>
                             <button id="CButton" class="languageSelectorButtons" onclick="toggleCProjectsDisplay()">
                                 <h3 id="C">
@@ -516,8 +516,8 @@
                             </button>
                             <ul>
                                 <li>
-                                    <button class="projectSelectorButtons CProjects">
-                                        ASV
+                                    <button class="projectSelectorButtons CProjects" onclick="showHelloCProject()">
+                                        Hello C
                                     </button>
                                 </li>
                             </ul>
@@ -530,8 +530,8 @@
                             </button>
                             <ul>
                                 <li>
-                                    <button class="projectSelectorButtons C++Projects">
-                                        ASV
+                                    <button class="projectSelectorButtons C++Projects" onclick="showHelloCPlusPlusProject()">
+                                        Hello C++
                                     </button>
                                 </li>
                             </ul>
@@ -544,12 +544,12 @@
                             </button>
                             <ul>
                                 <li>
-                                    <button class="projectSelectorButtons C#Projects">
-                                        ASV
+                                    <button class="projectSelectorButtons C#Projects" onclick="showHelloCSharpProject()">
+                                        Hello C#
                                     </button>
                                 </li>
                             </ul>
-                        </li> -->
+                        </li> 
                     </ul>
                 </div>
             </div>
